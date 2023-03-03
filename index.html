@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chalkboard</title>
+</head>
+
+<body>
+    <div class="info">
+        <h1>A Wild Chalk Board Appears!</h1>
+        <h2>Draw whatever you want</h2>
+    </div>
+
+    <div id="selector">
+        <img src="./res/Chalk-Free-Download-PNG.png" alt="chalk"
+            onclick="document.getElementById('cursor').dataset.selected = '0'">
+        <img src="./res/NicePng_cutting-board-png_1077321.png" alt="eraser"
+            onclick="document.getElementById('cursor').dataset.selected = '1'">
+    </div>
+
+    <canvas id="draw"></canvas>
+
+    <div id="cursor" data-selected="0">
+        <div id="chalk"></div>
+        <div id="eraser"></div>
+    </div>
+
+</body>
+
+<style>
+    @font-face {
+        font-family: chalk;
+        src: url(./fonts/Chalktastic/Chalktastic.ttf);
+    }
+
+    :root {
+        --board-color: hsl(178, 18%, 28%);
+
+        --chalk-white: #f5f5f5;
+        --chalk-red: #f5b5b5;
+        --chalk-blue: #b5b5f5;
+        --chalk-green: #b5f5b5;
+        --chalk-yellow: #f5f5b5;
+        --chalk-orange: #f5b5b5;
+        --chalk-brown: #c8c0b0;
+        --chalk-purple: #b5b5f5;
+        --chalk-pink: #f5b5f5;
+        --chalk-grey: #b5b5b5;
+
+        --selected-color: var(--chalk-white);
+    }
+
+    body,
+    html {
+        height: 100%;
+    }
+
+    body {
+        background: radial-gradient(ellipse at 50% 50%, transparent, #0002),
+            var(--board-color);
+        padding: 0;
+        margin: 0;
+        cursor: none;
+        font-family: chalk;
+        color: var(--chalk-white);
+        overflow: hidden;
+    }
+
+    .info {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    h1 {
+        color: var(--chalk-red);
+    }
+
+    h2 {
+        color: var(--chalk-blue);
+    }
+
+    h3 {
+        color: var(--chalk-green);
+    }
+
+    h4 {
+        color: var(--chalk-yellow);
+    }
+
+    h5 {
+        color: var(--chalk-orange);
+    }
+
+    h6 {
+        color: var(--chalk-brown);
+    }
+
+    a {
+        color: var(--chalk-purple);
+    }
+
+    #cursor {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        z-index: -100;
+        user-select: none;
+    }
+
+    #cursor[data-selected="0"] #chalk {
+        display: block;
+    }
+
+    #cursor[data-selected="0"] #eraser {
+        display: none;
+    }
+
+    #cursor[data-selected="1"] #chalk {
+        display: none;
+    }
+
+    #cursor[data-selected="1"] #eraser {
+        display: block;
+    }
+
+    #chalk {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background:
+            radial-gradient(circle at 50% 50%, var(--selected-color), transparent 70%),
+            url(https://grainy-gradients.vercel.app/noise.svg);
+        filter: blur(1px);
+        z-index: 100;
+        user-select: none;
+        border-radius: 50%;
+
+        transform: translate(-50%, -50%);
+    }
+
+    #eraser {
+        position: relative;
+        width: 100px;
+        height: 200px;
+        background:
+            radial-gradient(circle at 50% 50%, black, rgb(19, 19, 19) 70%),
+            url(https://grainy-gradients.vercel.app/noise.svg);
+        filter: blur(1px);
+        z-index: 100;
+        user-select: none;
+
+        transform: translate(-50%, -50%);
+        /* border-radius: 50%; */
+    }
+
+
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    #selector {
+        position: absolute;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    #selector img {
+        height: 10rem;
+        width: 10rem;
+        margin: 1rem;
+        cursor: pointer;
+        border: 2px solid var(--chalk-white);
+    }
+</style>
+
+<script>
+
+</script>
+
+<script src="./script.js" defer></script>
+
+</html>
